@@ -5,29 +5,8 @@ import 'package:get/get.dart';
 
 import '../controller/login_controller.dart';
 
-class LoginPage extends StatefulWidget {
-  final String title;
-  const LoginPage({Key? key, this.title = "Login"}) : super(key: key);
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  @override
-  void initState() {
-    super.initState();
-
-    // EdgeAlert.show(
-    //   context,
-    //   title: 'Erro',
-    //   description: message,
-    //   gravity: EdgeAlert.TOP,
-    //   duration: EdgeAlert.LENGTH_SHORT,
-    //   backgroundColor: Colors.red,
-    //   icon: Icons.error
-    // );
-  }
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Login Page"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),

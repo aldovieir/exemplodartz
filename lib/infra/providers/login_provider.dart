@@ -3,6 +3,7 @@ import 'package:exemplo_dartz/infra/interfaces/http_request_interface.dart';
 import 'package:get/get.dart';
 
 import '../../core/exceptions/exeptions.dart';
+import '../models/login_request.dart';
 import '../services/http_request_service.dart';
 
 class LoginProvider {
@@ -10,13 +11,13 @@ class LoginProvider {
 
 //Provider de login, utilizando o serviço de HTTP passando a rota e o obejeto para o serviço.
   Future<Either<HttpRequestException, bool>> logar(
-      {required String login, required String senha}) async {
+      {required LoginRequest request}) async {
     var response = await _service.postHttp(
       //caminho do servido para fazer um metodo post utilizando o serviço implantado
       path: "path",
       //objeto passado no exemplo de login
       //poderia ser um modelo separado e fariamos o toMap aqui
-      object: {"login": login, "senha": senha},
+      object: request.toMap(),
     );
     return response.fold((error) => left(error), (sucesso) {
       return right(sucesso);

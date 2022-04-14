@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../core/exceptions/exeptions.dart';
 import '../../../core/exceptions/shared/dialogs/loading_dialog.dart';
 import '../../../core/exceptions/shared/dialogs/show_error.dart';
+import '../../../infra/models/login_request.dart';
 import '../../../infra/repositorys/login_repository.dart';
 import '../../home/views/home_page.dart';
 
@@ -51,18 +52,19 @@ class LoginController extends GetxController {
   logar() async {
     carregando.value = true;
     await Future.delayed(const Duration(seconds: 3));
-    var response = await repository.logar(
+    LoginRequest request = LoginRequest(
         login: loginController.text, senha: passwordController.text);
+    var response = await repository.logar(request: request);
 
     response.fold((error) {
       carregando.value = false;
       //navegando com erro pra passar pra tela home
-      Get.off(
-        const HomePage(),
-      );
+      // Get.off(
+      //   const HomePage(),
+      // );
 
       //Tratando erro quando tiver implementação de um serviço para logar
-      // falha.value = optionOf(error);
+      falha.value = optionOf(error);
     }, (sucesso) async {
       if (sucesso) {
         carregando.value = false;

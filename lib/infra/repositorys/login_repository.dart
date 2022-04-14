@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:exemplo_dartz/infra/providers/login_provider.dart';
 
 import '../../core/exceptions/exeptions.dart';
+import '../models/login_request.dart';
 
 class LoginRepository {
   final LoginProvider loginProvider;
@@ -9,7 +10,7 @@ class LoginRepository {
   LoginRepository({required this.loginProvider});
 //repository comunica o controller com o provider..
   Future<Either<HttpRequestException, bool>> logar(
-      {required String login, required String senha}) async {
-    return await loginProvider.logar(login: login, senha: senha);
+      {required LoginRequest request}) async {
+    return await loginProvider.logar(request: request);
   }
 }
